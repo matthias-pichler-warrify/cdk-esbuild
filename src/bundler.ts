@@ -62,8 +62,7 @@ export interface BundlerProps {
    *
    * @stability stable
    */
-  readonly copyDir?: string | string[] | Record<string, string | string []>;
-
+  readonly copyDir?: string | string[] | Record<string, string | string[]>;
 
   /**
    * Escape hatch to provide the bundler with a custom build function.
@@ -127,7 +126,6 @@ export class EsbuildBundler {
 
     this.local = {
       tryBundle: (outputDir: string, _options: BundlingOptions): boolean => {
-
         if (this.props.copyDir) {
           const copyDir = this.getCopyDirList(this.props.copyDir);
 
@@ -136,11 +134,13 @@ export class EsbuildBundler {
               this.props?.buildOptions?.absWorkingDir ?? process.cwd(),
               src,
             );
-            const destDir = resolve(outputDir, dest) ;
+            const destDir = resolve(outputDir, dest);
 
             const destToOutput = relative(outputDir, destDir);
             if (destToOutput.startsWith('..') || isAbsolute(destToOutput)) {
-              throw new Error('Cannot copy files to outside of the asset staging directory. See docs for details.');
+              throw new Error(
+                'Cannot copy files to outside of the asset staging directory. See docs for details.',
+              );
             }
 
             mkdirSync(destDir, { recursive: true });
@@ -165,7 +165,9 @@ export class EsbuildBundler {
     };
   }
 
-  private getCopyDirList(copyDir: BundlerProps['copyDir']): Array<[string, string]> {
+  private getCopyDirList(
+    copyDir: BundlerProps['copyDir'],
+  ): Array<[string, string]> {
     // Nothing to copy
     if (!copyDir) {
       return [];
@@ -182,15 +184,13 @@ export class EsbuildBundler {
       !Array.isArray(copyDir) &&
       copyDir !== null
     ) {
-      return Object
-        .entries(copyDir)
-        .flatMap(([dest, sources]) => {
-          if (Array.isArray(sources)) {
-            return sources.map((src) => [dest, src]) as Array<[string, string]>;
-          }
+      return Object.entries(copyDir).flatMap(([dest, sources]) => {
+        if (Array.isArray(sources)) {
+          return sources.map((src) => [dest, src]) as Array<[string, string]>;
+        }
 
-          return [[dest, sources]];
-        });
+        return [[dest, sources]];
+      });
     }
 
     // A single string

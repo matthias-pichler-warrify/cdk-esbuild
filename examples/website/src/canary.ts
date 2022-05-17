@@ -1,15 +1,14 @@
 import assert from "assert";
 import synthetics from "Synthetics";
+import "pptr-testing-library/extend";
+import { queries } from "pptr-testing-library";
 
 export const handler = async () => {
-  assert(process.env.MONITORING_URL);
-  assert(process.env.TIMEOUT);
-
-  const { MONITORING_URL, TIMEOUT } = process.env;
-
   const page = await synthetics.getPage();
-  await page.goto(MONITORING_URL, { timeout: parseInt(TIMEOUT) });
-  await page.screenshot({ path: "/tmp/screenshot.png" });
+  const $document = await page.getDocument();
+  const $heading = await queries.getByTestId($document, "heading");
+
+  assert((await $heading.getNodeText()).includes("Static Website with React"));
 
   return;
 };

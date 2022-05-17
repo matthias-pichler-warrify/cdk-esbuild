@@ -41,12 +41,20 @@ export class WebsiteStack extends Stack {
 
     const canary = new Canary(this, "Monitoring", {
       schedule: Schedule.rate(Duration.hours(1)),
-      runtime: Runtime.SYNTHETICS_NODEJS_PUPPETEER_3_2,
+      runtime: Runtime.SYNTHETICS_NODEJS_PUPPETEER_3_5,
       test: Test.custom({
         code: new TypeScriptCode("./src/canary.ts", {
           buildOptions: {
             outdir: "nodejs/node_modules",
-            external: ["Synthetics"],
+            external: [
+              "Synthetics",
+              "pptr-testing-library",
+              "pptr-testing-library/extend",
+            ],
+          },
+          copyDir: {
+            "nodejs/node_modules/pptr-testing-library":
+              "node_modules/pptr-testing-library",
           },
         }),
         handler: "canary.handler",
