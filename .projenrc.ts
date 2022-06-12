@@ -62,9 +62,10 @@ const project = new awscdk.AwsCdkConstructLibrary({
 
   // Release
   packageManager: javascript.NodePackageManager.NPM,
-  npmDistTag: 'latest',
-  defaultReleaseBranch: 'main',
-  majorVersion: 3,
+  npmDistTag: 'next',
+  defaultReleaseBranch: 'support-other-langs',
+  majorVersion: 4,
+  prerelease: 'alpha',
   releaseTrigger: release.ReleaseTrigger.manual(),
   catalog: {
     twitter: '@mrgrain',

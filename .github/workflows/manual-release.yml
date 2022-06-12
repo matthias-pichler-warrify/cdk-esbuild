@@ -87,16 +87,16 @@ jobs:
       - name: Release
         run: npx -p jsii-release@latest jsii-release-npm
         env:
-          NPM_DIST_TAG: latest
+          NPM_DIST_TAG: next
           NPM_REGISTRY: registry.npmjs.org
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - name: Update tags
-        run: |
-          version=`cat dist/version.txt`
-          echo $version
-          npm dist-tag add @mrgrain/cdk-esbuild@$version cdk-v2
-          npm dist-tag add @mrgrain/cdk-esbuild@$version unstable
-          npm dist-tag add @mrgrain/cdk-esbuild@$version next
-        env:
-          NPM_REGISTRY: registry.npmjs.org
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      # - name: Update tags
+      #   run: |
+      #     version=`cat dist/version.txt`
+      #     echo $version
+      #     npm dist-tag add @mrgrain/cdk-esbuild@$version cdk-v2
+      #     npm dist-tag add @mrgrain/cdk-esbuild@$version unstable
+      #     npm dist-tag add @mrgrain/cdk-esbuild@$version next
+      #   env:
+      #     NPM_REGISTRY: registry.npmjs.org
+      #     NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
