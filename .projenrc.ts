@@ -66,7 +66,9 @@ const project = new awscdk.AwsCdkConstructLibrary({
   defaultReleaseBranch: 'support-other-langs',
   majorVersion: 4,
   prerelease: 'alpha',
-  releaseTrigger: release.ReleaseTrigger.manual(),
+  releaseTrigger: release.ReleaseTrigger.scheduled({
+    schedule: '0 17 * * *',
+  }),
   publishToPypi: {
     module: 'mrgrain.cdk-esbuild',
     distName: 'mrgrain.cdk_esbuild',
@@ -98,7 +100,6 @@ const project = new awscdk.AwsCdkConstructLibrary({
     'cdk.out',
     '.cdk.staging',
     'examples/template',
-    '!/.github/workflows/manual-release.yml',
     '!/examples/**',
   ],
   npmignore: [
@@ -115,6 +116,9 @@ const project = new awscdk.AwsCdkConstructLibrary({
     '.vscode',
   ],
 });
+
+// release only via manual trigger
+project.tryFindObjectFile('.github/workflows/release.yml')?.addOverride('on', 'workflow_dispatch');
 
 // eslint
 project.eslint?.allowDevDeps('projenrc/**');
