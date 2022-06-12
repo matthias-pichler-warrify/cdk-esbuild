@@ -59,9 +59,10 @@ const project = new awscdk.AwsCdkConstructLibrary({
 
   // Release
   packageManager: javascript.NodePackageManager.NPM,
-  npmDistTag: 'latest',
-  defaultReleaseBranch: 'main',
-  majorVersion: 3,
+  npmDistTag: 'next',
+  defaultReleaseBranch: 'support-other-langs',
+  majorVersion: 4,
+  prerelease: 'alpha',
   releaseTrigger: {
     isContinuous: false,
   } as ReleaseTrigger,
@@ -123,7 +124,7 @@ project.tasks.tryFind('release')?.spawn(publishTask!);
 // add additional tags on npm
 project.tryFindObjectFile('.github/workflows/release.yml')?.addToArray(
   'jobs.release_npm.steps',
-  tagOnNpm(project.package.packageName, ['cdk-v2', 'unstable', 'next']),
+  tagOnNpm(project.package.packageName, ['next']),
 );
 
 // eslint
