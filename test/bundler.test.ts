@@ -9,7 +9,7 @@ jest.mock('../src/formatMessages', () => ({
   printBuildMessages: jest.fn(),
 }));
 
-jest.mock('esbuild', () => ({
+jest.mock('../src/esbuild-wrapper', () => ({
   buildSync: jest.fn(),
 }));
 

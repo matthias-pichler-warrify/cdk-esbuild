@@ -88,6 +88,9 @@
       "steps": [
         {
           "exec": "jsii --silence-warnings=reserved-word"
+        },
+        {
+          "exec": "cp src/esbuild-polyfill.js lib"
         }
       ]
     },
