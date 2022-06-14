@@ -19,6 +19,10 @@
       "type": "build"
     },
     {
+      "name": "@types/which",
+      "type": "build"
+    },
+    {
       "name": "@typescript-eslint/eslint-plugin",
       "version": "^5",
       "type": "build"
@@ -124,6 +128,10 @@
     {
       "name": "typescript",
       "type": "build"
+    },
+    {
+      "name": "which",
+      "type": "bundled"
     },
     {
       "name": "aws-cdk-lib",
