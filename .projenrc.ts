@@ -85,9 +85,13 @@ const project = new awscdk.AwsCdkConstructLibrary({
   devDeps: [
     '@aws-cdk/aws-synthetics-alpha@2.0.0-alpha.11',
     '@types/eslint',
+    '@types/which',
     'esbuild@^0.14.0',
     'jest-mock',
     'ts-morph',
+  ],
+  bundledDeps: [
+    'which',
   ],
 
   // Ignore files
