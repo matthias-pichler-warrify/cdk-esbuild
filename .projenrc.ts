@@ -1,3 +1,4 @@
+import { copyFileSync } from 'fs';
 import {
   awscdk,
   javascript,
@@ -169,6 +170,7 @@ project.tryFindObjectFile('package.json')?.addOverride('optionalDependencies', {
   esbuild: '^0.14.0',
 });
 
+copyFileSync('node_modules/esbuild/lib/main.js', 'src/esbuild-polyfill.js');
 new TypeScriptSourceFile(project, 'src/esbuild-types.ts', {
   source: 'node_modules/esbuild/lib/main.d.ts',
   editGitignore: false,

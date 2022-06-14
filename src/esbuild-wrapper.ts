@@ -1,8 +1,13 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
 function esbuild() {
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  return require('esbuild');
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    return require('esbuild');
+  } catch (error) {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    return require('./esbuild-polyfill');
+  }
 }
 
 export const buildSync = esbuild().buildSync;
