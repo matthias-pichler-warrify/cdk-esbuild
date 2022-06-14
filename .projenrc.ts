@@ -1,3 +1,4 @@
+import { copyFileSync } from 'fs';
 import {
   awscdk,
   javascript,
@@ -114,7 +115,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   ],
 });
 
-// release only via manual trigger
+// add additional tags on npm
 project.tryFindObjectFile('.github/workflows/release.yml')?.addToArray(
   'jobs.release_npm.steps',
   tagOnNpm(project.package.packageName, ['next']),
@@ -169,6 +170,7 @@ project.tryFindObjectFile('package.json')?.addOverride('optionalDependencies', {
   esbuild: '^0.14.0',
 });
 
+
 new TypeScriptSourceFile(project, 'src/esbuild-types.ts', {
   source: 'node_modules/esbuild/lib/main.d.ts',
   editGitignore: false,
@@ -192,6 +194,9 @@ new TypeScriptSourceFile(project, 'src/esbuild-types.ts', {
     esbuildTypes.getInterface('InitializeOptions')?.getProperty('wasmModule')?.setType('any');
   },
 });
+
+copyFileSync('node_modules/esbuild/lib/main.js', 'src/esbuild-polyfill.js');
+project.compileTask.exec('cp src/esbuild-polyfill.js lib');
 
 
 // Synth project
