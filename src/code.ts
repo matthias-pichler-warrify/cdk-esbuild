@@ -1,5 +1,5 @@
 import { CfnResource, Stack } from 'aws-cdk-lib';
-import { ResourceBindOptions } from 'aws-cdk-lib/aws-lambda';
+import { ResourceBindOptions, Code as LambdaCode } from 'aws-cdk-lib/aws-lambda';
 import { Location } from 'aws-cdk-lib/aws-s3';
 import { Construct } from 'constructs';
 import {
@@ -30,7 +30,7 @@ export interface TypeScriptCodeProps extends AssetBaseProps {};
 abstract class Code<
   Props extends JavaScriptCodeProps | TypeScriptCodeProps,
   Asset extends JSAsset | TSAsset
-> {
+> extends LambdaCode {
   protected abstract readonly assetClass: new (
     scope: Construct,
     id: string,
@@ -54,6 +54,7 @@ abstract class Code<
    * @param props - Asset properties.
    */
   constructor(public readonly entryPoints: EntryPoints, props: Props) {
+    super();
     const defaultOptions: Partial<BuildOptions> = {
       ...(!props.buildOptions?.platform ||
       props.buildOptions?.platform === 'node'
