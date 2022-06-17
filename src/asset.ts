@@ -35,7 +35,7 @@ type TypeScriptAssetProps = AssetProps;
 /**
  * @stability stable
  */
-abstract class Asset<Props extends AssetProps> extends S3Asset {
+export abstract class Asset<Props extends AssetProps> extends S3Asset {
   /**
    * @stability stable
    */

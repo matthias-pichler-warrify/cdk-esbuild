@@ -1,8 +1,8 @@
 import { CfnResource, Stack } from 'aws-cdk-lib';
-import { ResourceBindOptions, Code as LambdaCode } from 'aws-cdk-lib/aws-lambda';
-import { Location } from 'aws-cdk-lib/aws-s3';
+import { ResourceBindOptions, Code as LambdaCode, CodeConfig } from 'aws-cdk-lib/aws-lambda';
 import { Construct } from 'constructs';
 import {
+  Asset,
   AssetBaseProps,
   AssetProps,
   JavaScriptAsset as JSAsset,
@@ -15,31 +15,18 @@ function nodeMajorVersion(): number {
   return parseInt(process.versions.node.split('.')[0], 10);
 }
 
-export interface CodeConfig {
-  /**
-   * The location of the code in S3.
-   *
-   * @stability stable
-   */
-  readonly s3Location: Location;
-}
-
+export { CodeConfig } from 'aws-cdk-lib/aws-lambda';
 export interface JavaScriptCodeProps extends AssetBaseProps {};
 export interface TypeScriptCodeProps extends AssetBaseProps {};
 
-abstract class Code<
+export abstract class Code<
   Props extends JavaScriptCodeProps | TypeScriptCodeProps,
-  Asset extends JSAsset | TSAsset
 > extends LambdaCode {
-  protected abstract readonly assetClass: new (
-    scope: Construct,
-    id: string,
-    props: AssetProps
-  ) => Asset;
+  protected abstract getAsset(scope: Construct): Asset<AssetProps>;
 
   protected props: AssetProps;
 
-  protected asset!: Asset;
+  protected asset!: Asset<AssetProps>;
 
   /**
    * Determines whether this Code is inline code or not.
@@ -75,11 +62,7 @@ abstract class Code<
   bind(scope: Construct): CodeConfig {
     // If the same AssetCode is used multiple times, retain only the first instantiation.
     if (!this.asset) {
-      this.asset = new this.assetClass(
-        scope,
-        this.constructor.name,
-        this.props,
-      );
+      this.asset = this.getAsset(scope);
     } else if (Stack.of(this.asset) !== Stack.of(scope)) {
       throw new Error(
         `Asset is already associated with another stack '${
@@ -119,8 +102,14 @@ abstract class Code<
  *
  * @stability stable
  */
-export class JavaScriptCode extends Code<JavaScriptCodeProps, JSAsset> {
-  protected readonly assetClass = JSAsset;
+export class JavaScriptCode extends Code<JavaScriptCodeProps> {
+  protected getAsset(scope: Construct): Asset<AssetProps> {
+    return new JSAsset(
+      scope,
+      this.constructor.name,
+      this.props,
+    );
+  }
 
   constructor(
     /**
@@ -151,8 +140,14 @@ export class JavaScriptCode extends Code<JavaScriptCodeProps, JSAsset> {
  *
  * @stability stable
  */
-export class TypeScriptCode extends Code<TypeScriptCodeProps, TSAsset> {
-  protected readonly assetClass = TSAsset;
+export class TypeScriptCode extends Code<TypeScriptCodeProps> {
+  protected getAsset(scope: Construct): Asset<AssetProps> {
+    return new TSAsset(
+      scope,
+      this.constructor.name,
+      this.props,
+    );
+  }
 
   constructor(
     /**

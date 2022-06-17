@@ -1,16 +1,29 @@
 
-export { BuildOptions, TransformOptions } from './esbuild-types';
-
-export { EsbuildBundler, BundlerProps } from './bundler';
-
-export { JavaScriptAsset, TypeScriptAsset, AssetBaseProps, AssetProps } from './asset';
+export {
+  BuildOptions,
+  TransformOptions,
+} from './esbuild-types';
 
 export {
+  EsbuildBundler,
+  BundlerProps,
+} from './bundler';
+
+export {
+  Asset,
+  AssetBaseProps,
+  AssetProps,
+  JavaScriptAsset,
+  TypeScriptAsset,
+} from './asset';
+
+export {
+  Code,
+  CodeConfig,
   JavaScriptCode,
   JavaScriptCodeProps,
   TypeScriptCode,
   TypeScriptCodeProps,
-  CodeConfig,
 } from './code';
 
 export {
