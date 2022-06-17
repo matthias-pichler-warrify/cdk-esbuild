@@ -82,6 +82,20 @@ Instead use only relative paths and avoid `..`.
 
 ---
 
+##### `esbuildBinaryPath`<sup>Optional</sup> <a name="@mrgrain/cdk-esbuild.AssetProps.property.esbuildBinaryPath"></a>
+
+```typescript
+public readonly esbuildBinaryPath: string;
+```
+
+- *Type:* `string`
+
+Path to the binary used by esbuild.
+
+This is the same as setting the ESBUILD_BINARY_PATH environment variable.
+
+---
+
 ##### `entryPoints`<sup>Required</sup> <a name="@mrgrain/cdk-esbuild.AssetProps.property.entryPoints"></a>
 
 ```typescript
@@ -873,6 +887,20 @@ Instead use only relative paths and avoid `..`.
 
 ---
 
+##### `esbuildBinaryPath`<sup>Optional</sup> <a name="@mrgrain/cdk-esbuild.BundlerProps.property.esbuildBinaryPath"></a>
+
+```typescript
+public readonly esbuildBinaryPath: string;
+```
+
+- *Type:* `string`
+
+Path to the binary used by esbuild.
+
+This is the same as setting the ESBUILD_BINARY_PATH environment variable.
+
+---
+
 ### CodeConfig <a name="@mrgrain/cdk-esbuild.CodeConfig"></a>
 
 #### Initializer <a name="[object Object].Initializer"></a>
@@ -974,6 +1002,20 @@ Instead use only relative paths and avoid `..`.
 
 ---
 
+##### `esbuildBinaryPath`<sup>Optional</sup> <a name="@mrgrain/cdk-esbuild.JavaScriptCodeProps.property.esbuildBinaryPath"></a>
+
+```typescript
+public readonly esbuildBinaryPath: string;
+```
+
+- *Type:* `string`
+
+Path to the binary used by esbuild.
+
+This is the same as setting the ESBUILD_BINARY_PATH environment variable.
+
+---
+
 ##### `assetHash`<sup>Optional</sup> <a name="@mrgrain/cdk-esbuild.JavaScriptCodeProps.property.assetHash"></a>
 
 ```typescript
@@ -1066,6 +1108,20 @@ The destination cannot be outside of the asset staging directory.
 If you are receiving the error "Cannot copy files to outside of the asset staging directory."
 you are likely using `..` or an absolute path as key on the `copyDir` map.
 Instead use only relative paths and avoid `..`.
+
+---
+
+##### `esbuildBinaryPath`<sup>Optional</sup> <a name="@mrgrain/cdk-esbuild.JavaScriptSourceProps.property.esbuildBinaryPath"></a>
+
+```typescript
+public readonly esbuildBinaryPath: string;
+```
+
+- *Type:* `string`
+
+Path to the binary used by esbuild.
+
+This is the same as setting the ESBUILD_BINARY_PATH environment variable.
 
 ---
 
@@ -1614,6 +1670,20 @@ Instead use only relative paths and avoid `..`.
 
 ---
 
+##### `esbuildBinaryPath`<sup>Optional</sup> <a name="@mrgrain/cdk-esbuild.TypeScriptCodeProps.property.esbuildBinaryPath"></a>
+
+```typescript
+public readonly esbuildBinaryPath: string;
+```
+
+- *Type:* `string`
+
+Path to the binary used by esbuild.
+
+This is the same as setting the ESBUILD_BINARY_PATH environment variable.
+
+---
+
 ##### `assetHash`<sup>Optional</sup> <a name="@mrgrain/cdk-esbuild.TypeScriptCodeProps.property.assetHash"></a>
 
 ```typescript
@@ -1706,6 +1776,20 @@ The destination cannot be outside of the asset staging directory.
 If you are receiving the error "Cannot copy files to outside of the asset staging directory."
 you are likely using `..` or an absolute path as key on the `copyDir` map.
 Instead use only relative paths and avoid `..`.
+
+---
+
+##### `esbuildBinaryPath`<sup>Optional</sup> <a name="@mrgrain/cdk-esbuild.TypeScriptSourceProps.property.esbuildBinaryPath"></a>
+
+```typescript
+public readonly esbuildBinaryPath: string;
+```
+
+- *Type:* `string`
+
+Path to the binary used by esbuild.
+
+This is the same as setting the ESBUILD_BINARY_PATH environment variable.
 
 ---
 
