@@ -6,8 +6,8 @@ import {
   FileSystem,
   ILocalBundling,
 } from 'aws-cdk-lib';
-import { BuildFailure, BuildOptions, BuildResult } from './esbuild-types';
 import { buildSync } from './esbuild-wrapper';
+import { BuildFailure, BuildOptions, BuildResult } from './esbuild/types';
 import { printBuildMessages } from './formatMessages';
 
 /**
@@ -164,6 +164,7 @@ export class EsbuildBundler {
 
         try {
           const buildResult: BuildResult = buildFn({
+            // entryPoints: typeof entryPoints === 'string' ? [entryPoints] : entryPoints,
             entryPoints,
             ...(this.props?.buildOptions || {}),
             ...this.getOutputOptions(outputDir, { normalize, join }),

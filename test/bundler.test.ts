@@ -1,8 +1,8 @@
 import { FileSystem } from 'aws-cdk-lib';
 import { mocked } from 'jest-mock';
 import { EsbuildBundler } from '../src/bundler';
-import { BuildOptions, BuildResult } from '../src/esbuild-types';
 import { buildSync } from '../src/esbuild-wrapper';
+import { BuildOptions, BuildResult } from '../src/esbuild/types';
 import { printBuildMessages } from '../src/formatMessages';
 
 jest.mock('../src/formatMessages', () => ({

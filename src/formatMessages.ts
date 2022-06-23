@@ -1,12 +1,12 @@
 import { WriteStream } from 'tty';
 // eslint-disable-next-line import/no-extraneous-dependencies
+import { formatMessagesSync } from './esbuild-wrapper';
 import {
   BuildFailure,
   BuildResult,
   TransformFailure,
   TransformResult,
-} from './esbuild-types';
-import { formatMessagesSync } from './esbuild-wrapper';
+} from './esbuild/types';
 
 export function printBuildErrors(
   failure: TransformFailure | BuildFailure,

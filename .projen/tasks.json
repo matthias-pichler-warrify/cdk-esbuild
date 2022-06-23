@@ -90,7 +90,10 @@
           "exec": "jsii --silence-warnings=reserved-word"
         },
         {
-          "exec": "cp src/esbuild-polyfill.js lib"
+          "exec": "cp src/esbuild/main.js lib/esbuild"
+        },
+        {
+          "exec": "cp src/esbuild/LICENSE.md lib/esbuild"
         }
       ]
     },

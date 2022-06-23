@@ -7,7 +7,7 @@ import {
 import { Construct } from 'constructs';
 import { AssetBaseProps, AssetProps, JavaScriptAsset, TypeScriptAsset } from './asset';
 import { EntryPoints } from './bundler';
-import { BuildOptions } from './esbuild-types';
+import { BuildOptions } from './esbuild/types';
 
 export interface JavaScriptSourceProps extends AssetBaseProps{};
 export interface TypeScriptSourceProps extends AssetBaseProps{};

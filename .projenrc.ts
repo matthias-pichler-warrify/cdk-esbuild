@@ -1,4 +1,4 @@
-import { copyFileSync } from 'fs';
+import { copyFileSync, mkdirSync } from 'fs';
 import {
   awscdk,
   javascript,
@@ -177,7 +177,7 @@ project.tryFindObjectFile('package.json')?.addOverride('optionalDependencies', {
 });
 
 
-new TypeScriptSourceFile(project, 'src/esbuild-types.ts', {
+new TypeScriptSourceFile(project, 'src/esbuild/types.ts', {
   source: 'node_modules/esbuild/lib/main.d.ts',
   editGitignore: false,
   transformer: (esbuildTypes: SourceFile) => {
@@ -201,8 +201,11 @@ new TypeScriptSourceFile(project, 'src/esbuild-types.ts', {
   },
 });
 
-copyFileSync('node_modules/esbuild/lib/main.js', 'src/esbuild-polyfill.js');
-project.compileTask.exec('cp src/esbuild-polyfill.js lib');
+mkdirSync('src/esbuild', { recursive: true });
+copyFileSync('node_modules/esbuild/lib/main.js', 'src/esbuild/main.js');
+project.compileTask.exec('cp src/esbuild/main.js lib/esbuild');
+copyFileSync('node_modules/esbuild/LICENSE.md', 'src/esbuild/LICENSE.md');
+project.compileTask.exec('cp src/esbuild/LICENSE.md lib/esbuild');
 
 
 // Synth project

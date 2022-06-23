@@ -1,3 +1,5 @@
+import { BuildOptions, BuildResult, TransformOptions, TransformResult, formatMessagesSync as origFormatMessagesSync } from './esbuild/types';
+
 /* eslint-disable import/no-extraneous-dependencies */
 
 function esbuild() {
@@ -14,10 +16,12 @@ function esbuild() {
     }
 
     // eslint-disable-next-line @typescript-eslint/no-require-imports
-    return require('./esbuild-polyfill');
+    return require('./esbuild/main');
   }
 }
 
-export const buildSync = esbuild().buildSync;
-export const formatMessagesSync = esbuild().formatMessagesSync;
-export const transformSync = esbuild().transformSync;
+export const buildSync: (options: BuildOptions & {
+  entryPoints?: string[] | Record<string, string>;
+}) => BuildResult = esbuild().buildSync;
+export const formatMessagesSync: typeof origFormatMessagesSync = esbuild().formatMessagesSync;
+export const transformSync: (input: string, options?: TransformOptions) => TransformResult = esbuild().transformSync;

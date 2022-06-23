@@ -9,7 +9,7 @@ import {
   TypeScriptAsset as TSAsset,
 } from './asset';
 import { EntryPoints } from './bundler';
-import { BuildOptions } from './esbuild-types';
+import { BuildOptions } from './esbuild/types';
 
 function nodeMajorVersion(): number {
   return parseInt(process.versions.node.split('.')[0], 10);

@@ -2,7 +2,7 @@
 export {
   BuildOptions,
   TransformOptions,
-} from './esbuild-types';
+} from './esbuild/types';
 
 export {
   EsbuildBundler,
